@@ -47,15 +47,15 @@ class Blockchain:
 
         while current_index < len(chain):
             block = chain[current_index]
-            print(f'{last_block}')
-            print(f'{block}')
+            print(f'Last_block: {last_block}')
+            print(f'Current block: {block}')
             print("\n-----------\n")
             # Check that the hash of the block is correct
             if block['previous_hash'] != self.hash(last_block):
                 return False
 
             # Check that the Proof of Work is correct
-            if not self.valid_proof(last_block['proof'], block['proof'], last_block['previous_hash']):
+            if not self.valid_proof(last_block['proof'], block['proof'], block['previous_hash']):
                 return False
 
             last_block = block
@@ -159,7 +159,7 @@ class Blockchain:
 
          - Find a number p' such that hash(pp') contains leading 4 zeroes
          - Where p is the previous proof, and p' is the new proof
-         
+
         :param last_block: <dict> last Block
         :return: <int>
         """
